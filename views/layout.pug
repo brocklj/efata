@@ -1,13 +1,21 @@
 doctype html
 html
   head
-    title= title
+    title= 'Efata 1.0'
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/basic.css')
     link(rel='stylesheet', href='/stylesheets/dropzone.css')
     
   body
+    h1= 'Efata 1.0'
+    p Efata čtecí zařízení  
+  <nav>
+    <a href="/">Nahrát</a>
+    <a href="/output">Vygenerovat výstup</a>
+  </nav>
+  <br>
     block content
+    
 
     script(src='/javascripts/script.js')
     script(src='/javascripts/dropzone.js')

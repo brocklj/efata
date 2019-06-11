@@ -1,9 +1,7 @@
 extends layout
-
+  
 block content
-  h1= title
-  p Efata čtecí zařízení #{title}
-
+  h1= 'Nahrávání'
   form(action="...", method="post", enctype="multipart/form-data" class="dropzone")
     input(type="file", name="displayImage" style="visibility: hidden;")
     <div class="dz-message" data-dz-message><span>Přetáhněte sem soubory, nebo kliknutím je vyberte.</span></div>
