@@ -2,19 +2,31 @@ const EntitySchema = require("typeorm").EntitySchema;
 const Record = require("../model/Record").Record;
 
 module.exports = new EntitySchema({
-  name: "Post",
-  target: Post,
+  name: "Record",
+  target: Record,
   columns: {
     id: {
       primary: true,
       type: "int",
       generated: true
     },
-    title: {
+    name: {
       type: "varchar"
     },
-    text: {
-      type: "text"
+    start: {
+      type: "timestamp"
+    },
+    end: {
+      type: "timestamp"
+    },
+    timeDiff: {
+      type: "bigint"
+    },
+    reader: {
+      type: "varchar"
+    },
+    client: {
+      type: "varchar"
     }
   }
 });

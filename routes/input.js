@@ -1,13 +1,15 @@
 var express = require("express");
 var multer = require("multer");
 var parse = require("csv-parse/lib/sync");
+var Record = require("../model/Record").Record;
+var typeorm = require("typeorm");
 var router = express.Router();
 var storage = multer.memoryStorage();
 var upload = multer({
   storage: storage
 });
 
-router.post("/", upload.single("file"), (req, res) => {
+router.post("/", upload.single("file"), async (req, res) => {
   if (req.file.mimetype != "text/csv") {
     res.status(402).send("Error: spatny typ souboru");
   }
@@ -19,6 +21,24 @@ router.post("/", upload.single("file"), (req, res) => {
   });
 
   var records = runProcessing(output);
+
+  let { getRepository } = typeorm;
+
+  const postRepository = getRepository(Record);
+  const toSave = [];
+  for (let i = 0; i < records.length; ++i) {
+    let d = records[i];
+    console.log(d);
+    let record = new Record();
+    record.name = d.name;
+    record.start = new Date(d.start);
+    record.end = new Date(d.end);
+    record.timeDiff = d.timeDiff;
+    record.reader = d.reader;
+    record.client = "sds";
+    toSave.push(record);
+  }
+  await postRepository.save(toSave);
 
   res.status(200).json(records);
 });
@@ -89,8 +109,6 @@ function runProcessing(data) {
       }
     }
 
-    setTimeout(function() {}, 200);
-    console.log(output);
     return output;
   }
 
