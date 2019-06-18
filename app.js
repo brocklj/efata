@@ -1,5 +1,6 @@
 var createError = require("http-errors");
 var express = require("express");
+var typeorm = require("typeorm");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -16,6 +17,8 @@ var multer = multer();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
+typeorm.createConnection();
 
 app.use(logger("dev"));
 app.use(express.json());
