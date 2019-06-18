@@ -1,7 +1,7 @@
 extends layout
   
 block content
-  h1= 'Nahrávání'
+  h1= 'Nahrát'
   form(action="./input", method="post", enctype="multipart/form-data" class="dropzone")
     input(type="file", name="displayImage" style="visibility: hidden;")
     <div class="dz-message" data-dz-message><span>Přetáhněte sem soubory, nebo kliknutím je vyberte.</span></div>
