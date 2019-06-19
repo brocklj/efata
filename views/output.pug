@@ -2,17 +2,25 @@ extends layout
   
 block content
   h1= 'Výstup'
-  table
+  <form action="" method="get">
+    <input name="start_date" type="date">
+    <input name="end_date" type="date">
+    <input type="submit" value="filtrovat">
+  <form>
+  table(class="table")
     thead
       tr
-        th= 'Nazev cinnosti'
-        th= 'celkovy cas'
-        th= 'klient'
-        th= 'ctecka'
+        th(scope="col")= 'Nazev cinnosti'                
+        th= 'Celkovy cas'
+        th= 'Klient'
+        th= 'Ctecka'
+        th= 'Pocet zaznamu'
+
     tbody                
       each r in out
         tr
-          td= r.name
+          td= r.name          
           td= r.totalTime
           td= r.client
           td= r.reader
+          td= r.count
