@@ -15,7 +15,7 @@ router.post("/", upload.single("file"), async (req, res) => {
   }
   const buffer = req.file.buffer.toString();
 
-  const output = parse(`"code","time","date","vin"\r\n` + buffer, {
+  const output = parse(`"code","time","date","reader"\r\n` + buffer, {
     columns: true,
     skip_empty_lines: true
   });
@@ -28,13 +28,13 @@ router.post("/", upload.single("file"), async (req, res) => {
   const toSave = [];
   for (let i = 0; i < records.length; ++i) {
     let d = records[i];
-    console.log(d);
+    let client = getClient(output, d);
     let record = new Record();
     record.name = d.name;
     record.date = d.date;
     record.timeDiff = d.timeDiff;
     record.reader = d.reader;
-    record.client = "sds";
+    record.client = client;
     toSave.push(record);
   }
   await postRepository.save(toSave);
@@ -81,19 +81,11 @@ function runProcessing(data) {
       var data = input[i];
 
       var name = data.code;
-      var time = data.time.split(":");
-      var date = data.date.split("/");
-      var rawDateTime = data.date + " " + data.time;
-      var reader = data.vin;
 
-      var date = new Date(
-        20 + date[2],
-        date[1] - 1,
-        date[0],
-        time[0],
-        time[1],
-        time[2]
-      );
+      var rawDateTime = data.date + " " + data.time;
+      var reader = data.reader;
+
+      var date = getDate(data.date, data.time);
 
       var inputObj = {
         name: name,
@@ -205,6 +197,58 @@ function runProcessing(data) {
   }
 
   return processData(data);
+}
+
+function getDate(date, time) {
+  time = time.split(":");
+  date = date.split("/");
+  return new Date(
+    20 + date[2],
+    date[1] - 1,
+    date[0],
+    time[0],
+    time[1],
+    time[2]
+  );
+}
+
+function getClient(output, record) {
+  var clients = [
+    "1a",
+    "1b",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6a",
+    "6b",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12a",
+    "12b",
+    "14a",
+    "14b",
+    "15a",
+    "15b"
+  ];
+  output = output.map(line => {
+    return {
+      reader: line.reader,
+      code: line.code,
+      date: getDate(line.date, line.time)
+    };
+  });
+  var client = output.find(line => {
+    return (
+      line.date - record.date <= 30000 &&
+      clients.includes(line.code) &&
+      line.reader == record.reader
+    );
+  });
+  return client && client.code ? client.code : "Klient nedefinovan";
 }
 
 module.exports = router;
