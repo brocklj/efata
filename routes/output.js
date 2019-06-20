@@ -12,18 +12,16 @@ router.get("/", async function(req, res, next) {
     `SELECT name, client, reader, SUM("timeDiff") as "timeDiff", COUNT(*) as "count"
     FROM public.record 
     ${start_date || end_date ? `WHERE` : ``} ${
-      start_date
-        ? `record."start" > TO_DATE('${start_date}', 'YYYY-MM-DD')`
-        : ``
+      start_date ? `record."date" > TO_DATE('${start_date}', 'YYYY-MM-DD')` : ``
     } ${start_date && end_date ? `AND` : ``} ${
-      end_date ? `record."end" < TO_DATE('${end_date}', 'YYYY-MM-DD')` : ``
+      end_date ? `record."date" < TO_DATE('${end_date}', 'YYYY-MM-DD')` : ``
     } 
     GROUP BY  record.client, record.name, record.reader   
     ORDER BY client, reader ASC;`
   );
   const out = processStat(records);
 
-  res.render("output", { title: "Efata 1.0", out });
+  res.render("output", { title: "Efata 1.0", out, start_date, end_date });
 });
 
 function processStat(records) {

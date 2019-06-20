@@ -13,10 +13,7 @@ module.exports = new EntitySchema({
     name: {
       type: "varchar"
     },
-    start: {
-      type: "timestamp"
-    },
-    end: {
+    date: {
       type: "timestamp"
     },
     timeDiff: {

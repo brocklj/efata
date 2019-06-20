@@ -31,8 +31,7 @@ router.post("/", upload.single("file"), async (req, res) => {
     console.log(d);
     let record = new Record();
     record.name = d.name;
-    record.start = new Date(d.start);
-    record.end = new Date(d.end);
+    record.date = d.date;
     record.timeDiff = d.timeDiff;
     record.reader = d.reader;
     record.client = "sds";

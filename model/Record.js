@@ -1,9 +1,8 @@
 /*export */ class Record {
-  constructor(id, name, start, end, timeDiff, reader, client) {
+  constructor(id, name, date, timeDiff, reader, client) {
     this.id = id;
     this.name = name;
-    this.start = start;
-    this.end = end;
+    this.date = date;
     this.timeDiff = timeDiff;
     this.reader = reader;
     this.client = client;
