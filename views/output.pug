@@ -3,8 +3,8 @@ extends layout
 block content
   h1= 'Výstup'
   <form action="" method="get">
-    <input name="start_date" type="date">
-    <input name="end_date" type="date">
+    input(name="start_date", value=`${start_date}`)
+    input(name="end_date", value=`${end_date}`)    
     <input type="submit" value="filtrovat">
   <form>
   table(class="table")

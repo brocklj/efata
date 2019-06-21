@@ -6,7 +6,12 @@ var timeFormat = require("../utils/timeFormat");
 
 /* GET home page. */
 router.get("/", async function(req, res, next) {
-  const { start_date, end_date } = req.query;
+  let { start_date, end_date } = req.query;
+  if (!(start_date && end_date)) {
+    const d = new Date() - 60 * 60 * 60 * 24 * 30 * new Date().getDate();
+    start_date = formatDate(new Date(d));
+    end_date = formatDate(new Date());
+  }
   const manager = typeorm.getManager();
   const records = await manager.query(
     `SELECT name, client, reader, SUM("timeDiff") as "timeDiff", COUNT(*) as "count"
@@ -36,4 +41,15 @@ function processStat(records) {
   });
 }
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
 module.exports = router;
