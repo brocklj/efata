@@ -241,7 +241,7 @@ function getClient(output, record) {
   var client = output.find(line => {
     return (
       line.date - record.date <= 30000 &&
-      clients.includes(line.code) &&
+      clients.includes(line.code.toLowerCase()) &&
       line.reader == record.reader
     );
   });
