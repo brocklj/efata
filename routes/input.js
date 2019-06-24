@@ -10,9 +10,6 @@ var upload = multer({
 });
 
 router.post("/", upload.single("file"), async (req, res) => {
-  if (req.file.mimetype != "text/csv") {
-    res.status(402).send("Error: spatny typ souboru");
-  }
   const buffer = req.file.buffer.toString();
 
   const output = parse(`"code","time","date","reader"\r\n` + buffer, {
