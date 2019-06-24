@@ -6,11 +6,16 @@ var timeFormat = require("../utils/timeFormat");
 
 /* GET home page. */
 router.get("/", async function(req, res, next) {
-  let { start_date, end_date } = req.query;
+  let start_date;
+  let end_date;
+  start_date = req.start_date;
+  end_date = req.end_date;
+
   if (!(start_date && end_date)) {
-    const d = new Date() - 60 * 60 * 60 * 24 * 30 * new Date().getDate();
-    start_date = formatDate(new Date(d));
-    end_date = formatDate(new Date());
+    var tomorrow = new Date();
+    tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
+    start_date = formatDate(new Date().setDate(new Date().getDate() - 30));
+    end_date = formatDate(new Date(tomorrow));
   }
   const manager = typeorm.getManager();
   const records = await manager.query(

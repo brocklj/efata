@@ -211,25 +211,25 @@ function getDate(date, time) {
 
 function getClient(output, record) {
   var clients = [
-    "1a",
-    "1b",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6a",
-    "6b",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12a",
-    "12b",
-    "14a",
-    "14b",
-    "15a",
-    "15b"
+    "uzivatel 1a",
+    "uzivatel 1b",
+    "uzivatel 2",
+    "uzivatel 3",
+    "uzivatel 4",
+    "uzivatel 5",
+    "uzivatel 6a",
+    "uzivatel 6b",
+    "uzivatel 7",
+    "uzivatel 8",
+    "uzivatel 9",
+    "uzivatel 10",
+    "uzivatel 11",
+    "uzivatel 12a",
+    "uzivatel 12b",
+    "uzivatel 14a",
+    "uzivatel 14b",
+    "uzivatel 15a",
+    "uzivatel 15b"
   ];
   output = output.map(line => {
     return {
