@@ -8,12 +8,12 @@ var timeFormat = require("../utils/timeFormat");
 router.get("/", async function(req, res, next) {
   let start_date;
   let end_date;
-  start_date = req.start_date;
-  end_date = req.end_date;
+  start_date = req.query.start_date;
+  end_date = req.query.end_date;
 
   if (!(start_date && end_date)) {
     var tomorrow = new Date();
-    tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow = tomorrow.setDate(tomorrow.getDate());
     start_date = formatDate(new Date().setDate(new Date().getDate() - 30));
     end_date = formatDate(new Date(tomorrow));
   }
@@ -22,9 +22,11 @@ router.get("/", async function(req, res, next) {
     `SELECT name, client, reader, SUM("timeDiff") as "timeDiff", COUNT(*) as "count"
     FROM public.record 
     ${start_date || end_date ? `WHERE` : ``} ${
-      start_date ? `record."date" > TO_DATE('${start_date}', 'YYYY-MM-DD')` : ``
+      start_date
+        ? `record."date" >= TO_DATE('${start_date}', 'YYYY-MM-DD')`
+        : ``
     } ${start_date && end_date ? `AND` : ``} ${
-      end_date ? `record."date" < TO_DATE('${end_date}', 'YYYY-MM-DD')` : ``
+      end_date ? `record."date" <= TO_DATE('${end_date}', 'YYYY-MM-DD')` : ``
     } 
     GROUP BY  record.client, record.name, record.reader   
     ORDER BY client, reader ASC;`
