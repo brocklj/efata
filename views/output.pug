@@ -2,10 +2,16 @@ extends layout
   
 block content
   h1= 'Výstup'
-  <form action="" method="get">
-    input(name="start_date", value=`${start_date}`)
-    input(name="end_date", value=`${end_date}`)    
-    <input type="submit" value="filtrovat">
+  <form action="" method="get" class="input-group sm-2">
+  <div class="input-group-prepend">
+    label(for="start_date", class="input-group-text") od   
+  </div>     
+    input(name="start_date", value=`${start_date}`, class="form-control")
+  <div class="input-group-prepend">
+    label(for="end_date",class="input-group-text") do 
+  </div>       
+    input(name="end_date", value=`${end_date}`, class="form-control")    
+    <input type="submit" class="btn btn-primary" value="filtrovat">
   <form>
   table(class="table")
     thead

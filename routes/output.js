@@ -10,12 +10,20 @@ router.get("/", async function(req, res, next) {
   let end_date;
   start_date = req.query.start_date;
   end_date = req.query.end_date;
+  const regex = /\d{4}-([0]{1}[0-9]{1}|[1]{1}[0-2]{1})-([0]{1}[0-9]{1}|[1-3]{1}[0-9])\s\d{2}:\d{2}:\d{2}/;
+  if (
+    start_date &&
+    start_date &&
+    !(start_date.match(regex) && end_date.match(regex))
+  ) {
+    res.redirect("/output");
+  }
 
   if (!(start_date && end_date)) {
-    var tomorrow = new Date();
-    tomorrow = tomorrow.setDate(tomorrow.getDate());
-    start_date = formatDate(new Date().setDate(new Date().getDate() - 30));
-    end_date = formatDate(new Date(tomorrow));
+    start_date =
+      formatDate(new Date().setDate(new Date().getDate())) + " 07:00:00";
+    end_date =
+      formatDate(new Date().setDate(new Date().getDate() + 1)) + " 06:59:59";
   }
   const manager = typeorm.getManager();
   const records = await manager.query(
@@ -23,11 +31,11 @@ router.get("/", async function(req, res, next) {
     FROM public.record 
     ${start_date || end_date ? `WHERE` : ``} ${
       start_date
-        ? `record."date" >= TO_TIMESTAMP('${start_date} 00:00:00', 'YYYY-MM-DD HH24:MI:SS')`
+        ? `record."date" >= TO_TIMESTAMP('${start_date}', 'YYYY-MM-DD HH24:MI:SS')`
         : ``
     } ${start_date && end_date ? `AND` : ``} ${
       end_date
-        ? `record."date" <= TO_TIMESTAMP('${end_date} 23:59:59', 'YYYY-MM-DD HH24:MI:SS')`
+        ? `record."date" <= TO_TIMESTAMP('${end_date}', 'YYYY-MM-DD HH24:MI:SS')`
         : ``
     } 
     GROUP BY  record.client, record.name, record.reader   
