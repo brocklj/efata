@@ -23,10 +23,12 @@ router.get("/", async function(req, res, next) {
     FROM public.record 
     ${start_date || end_date ? `WHERE` : ``} ${
       start_date
-        ? `record."date" >= TO_DATE('${start_date}', 'YYYY-MM-DD')`
+        ? `record."date" >= TO_TIMESTAMP('${start_date} 00:00:00', 'YYYY-MM-DD HH24:MI:SS')`
         : ``
     } ${start_date && end_date ? `AND` : ``} ${
-      end_date ? `record."date" <= TO_DATE('${end_date}', 'YYYY-MM-DD')` : ``
+      end_date
+        ? `record."date" <= TO_TIMESTAMP('${end_date} 23:59:59', 'YYYY-MM-DD HH24:MI:SS')`
+        : ``
     } 
     GROUP BY  record.client, record.name, record.reader   
     ORDER BY client, reader ASC;`
