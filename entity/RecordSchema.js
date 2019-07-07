@@ -2,6 +2,7 @@ const EntitySchema = require("typeorm").EntitySchema;
 const Record = require("../model/Record").Record;
 
 module.exports = new EntitySchema({
+  uniques: ["UQ_NAMES", "date", "client", "name"],
   name: "Record",
   target: Record,
   columns: {
@@ -24,6 +25,10 @@ module.exports = new EntitySchema({
     },
     client: {
       type: "varchar"
+    },
+    myyy: {
+      type: "varchar",
+      nullable: true
     }
   }
 });

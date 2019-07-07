@@ -1,5 +1,27 @@
 import { Record } from "../model/Record";
 
+export const clientCodes = [
+  "uzivatel 1a",
+  "uzivatel 1b",
+  "uzivatel 2",
+  "uzivatel 3",
+  "uzivatel 4",
+  "uzivatel 5",
+  "uzivatel 6a",
+  "uzivatel 6b",
+  "uzivatel 7",
+  "uzivatel 8",
+  "uzivatel 9",
+  "uzivatel 10",
+  "uzivatel 11",
+  "uzivatel 12a",
+  "uzivatel 12b",
+  "uzivatel 14a",
+  "uzivatel 14b",
+  "uzivatel 15a",
+  "uzivatel 15b"
+];
+
 export default class RecordGenerator {
   constructor() {
     this.START = [
@@ -28,27 +50,7 @@ export default class RecordGenerator {
       "Jednani se zaj kon 0"
     ];
 
-    this.clientCodes = [
-      "uzivatel 1a",
-      "uzivatel 1b",
-      "uzivatel 2",
-      "uzivatel 3",
-      "uzivatel 4",
-      "uzivatel 5",
-      "uzivatel 6a",
-      "uzivatel 6b",
-      "uzivatel 7",
-      "uzivatel 8",
-      "uzivatel 9",
-      "uzivatel 10",
-      "uzivatel 11",
-      "uzivatel 12a",
-      "uzivatel 12b",
-      "uzivatel 14a",
-      "uzivatel 14b",
-      "uzivatel 15a",
-      "uzivatel 15b"
-    ];
+    this.clientCodes = clientCodes;
 
     this.waiting = [];
 
