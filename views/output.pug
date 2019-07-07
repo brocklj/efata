@@ -24,22 +24,25 @@ block content
     <input type="submit" class="btn btn-primary" value="filtrovat">
   </form>
   </br>
-  if !client
-      h2 Report pro: Celá organizace
-  else  
-    h2 Report pro: #{client}
-  </br>
-  table(class="table")
-    thead
-      tr
-        th(scope="col")= 'Nazev cinnosti'                
-        th= 'Celkovy cas'
-        th= 'Pocet zaznamu'
-
-    tbody                
-      each r in out
+  #report-table  
+    if !client
+      h2 Report pro: Celá organizace 
+    else  
+      h2 Report pro: #{client}
+    h4 start: #{start_date}
+    h4 konec: #{end_date}
+    </br>
+    table(class="table")
+      thead
         tr
-          td= r.name          
-          td= r.totalTime
-          td= r.count
-  <a href="#" class="btn btn-secondary">Exportovat (v přípravě)</a>
+          th(scope="col")= 'Nazev cinnosti'                
+          th= 'Celkovy cas'
+          th= 'Pocet zaznamu'
+
+      tbody                
+        each r in out
+          tr
+            td= r.name          
+            td= r.totalTime
+            td= r.count
+  <a href="#" onclick="printDiv('report-table')" class="btn btn-secondary">Tisk / export pdf</a>
