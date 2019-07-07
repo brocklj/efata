@@ -22,10 +22,16 @@ router.get("/", async function(req, res, next) {
   }
 
   if (!(start_date && end_date)) {
-    start_date =
-      formatDate(new Date().setDate(new Date().getDate())) + " 07:00:00";
-    end_date =
-      formatDate(new Date().setDate(new Date().getDate() + 1)) + " 06:59:59";
+    const date = new Date(
+      new Date().setDate(
+        new Date().getHours() < 7
+          ? new Date().getDate() - 1
+          : new Date().getDate()
+      )
+    );
+
+    start_date = formatDate(new Date().setDate(date.getDate())) + " 07:00:00";
+    end_date = formatDate(new Date().setDate(date.getDate() + 1)) + " 06:59:59";
   }
   const manager = typeorm.getManager();
   const records = await manager.query(
