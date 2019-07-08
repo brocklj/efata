@@ -35,9 +35,9 @@ block content
     table(class="table")
       thead
         tr
-          th(scope="col")= 'Nazev cinnosti'                
-          th= 'Celkovy cas'
-          th= 'Pocet zaznamu'
+          th(scope="col")= 'Název činnosti'                
+          th= 'Celkový čas'
+          th= 'Počet záznamů'
 
       tbody                
         each r in out
@@ -45,4 +45,7 @@ block content
             td= r.name          
             td= r.totalTime
             td= r.count
+    if out.length == 0
+      center Nebyly nalezeny žádné záznamy!
+    br
   <a href="#" onclick="printDiv('report-table')" class="btn btn-secondary">Tisk / export pdf</a>
