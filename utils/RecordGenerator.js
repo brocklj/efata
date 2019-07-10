@@ -3,10 +3,10 @@ import { Record } from "../model/Record";
 export const clientCodes = [
   "uzivatel 1a",
   "uzivatel 1b",
-  "uzivatel 2",
+  "Uzivatel 2",
   "uzivatel 3",
   "uzivatel 4",
-  "uzivatel 5",
+  "uzivatel 5 ",
   "uzivatel 6a",
   "uzivatel 6b",
   "uzivatel 7",
@@ -155,7 +155,7 @@ export default class RecordGenerator {
 
       this.output.push(new Record(endItem));
 
-      //this.waiting = this.waiting.splice(itemIndex, 1);
+      this.waiting = this.waiting.splice(itemIndex, 1);
     }
 
     return toFinish;
