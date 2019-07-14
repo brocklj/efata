@@ -58,8 +58,8 @@ describe("Test RecordGenerator", () => {
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:50:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:49:00",
-        end: "24/06/19 13:50:00",
+        start: new Date("2019-06-24T11:49:00.000Z"),
+        end: new Date("2019-06-24T11:50:00.000Z"),
         timeDiff: 60000,
         client: "uzivatel 1a"
       }),
@@ -67,8 +67,8 @@ describe("Test RecordGenerator", () => {
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T12:50:00.000Z"),
         reader: "149439",
-        start: "24/06/19 14:49:00",
-        end: "24/06/19 14:50:00",
+        start: new Date("2019-06-24T12:49:00.000Z"),
+        end: new Date("2019-06-24T12:50:00.000Z"),
         timeDiff: 60000,
         client: "uzivatel 1a"
       })
@@ -137,8 +137,8 @@ describe("Test RecordGenerator", () => {
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:53:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:49:00",
-        end: "24/06/19 13:53:00",
+        start: new Date("2019-06-24T11:49:00.000Z"),
+        end: new Date("2019-06-24T11:53:00.000Z"),
         timeDiff: 240000,
         client: "uzivatel 1a"
       }),
@@ -146,8 +146,8 @@ describe("Test RecordGenerator", () => {
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:55:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:51:00",
-        end: "24/06/19 13:55:00",
+        start: new Date("2019-06-24T11:51:00.000Z"),
+        end: new Date("2019-06-24T11:55:00.000Z"),
         timeDiff: 240000,
         client: "Uzivatel 2"
       })
@@ -240,8 +240,8 @@ describe("Test RecordGenerator", () => {
         name: "Jednani se zaj kon 0",
         date: new Date("2019-06-24T11:55:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:49:00",
-        end: "24/06/19 13:55:00",
+        start: new Date("2019-06-24T11:49:00.000Z"),
+        end: new Date("2019-06-24T11:55:00.000Z"),
         timeDiff: 360000,
         client: "uzivatel 1a"
       }),
@@ -249,8 +249,8 @@ describe("Test RecordGenerator", () => {
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:57:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:53:00",
-        end: "24/06/19 13:57:00",
+        start: new Date("2019-06-24T11:53:00.000Z"),
+        end: new Date("2019-06-24T11:57:00.000Z"),
         timeDiff: 240000,
         client: "Uzivatel 2"
       }),
@@ -258,8 +258,8 @@ describe("Test RecordGenerator", () => {
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:59:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:51:00",
-        end: "24/06/19 13:59:00",
+        start: new Date("2019-06-24T11:51:00.000Z"),
+        end: new Date("2019-06-24T11:59:00.000Z"),
         client: "uzivatel 3",
         timeDiff: 480000
       })

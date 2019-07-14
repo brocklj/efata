@@ -2,8 +2,9 @@ var express = require("express");
 var typeorm = require("typeorm");
 var router = express.Router();
 var Record = require("../model/Record").Record;
-var timeFormat = require("../utils/timeFormat");
 import { clientCodes } from "../utils/RecordGenerator";
+import { processStat } from "../utils/stat";
+import { formatDate } from "../utils/timeFormat";
 
 /* GET home page. */
 router.get("/", async function(req, res, next) {
@@ -62,26 +63,4 @@ router.get("/", async function(req, res, next) {
   });
 });
 
-function processStat(records) {
-  return records.map(r => {
-    return {
-      name: r.name,
-      totalTime: timeFormat.formatTimeDiff(r.timeDiff),
-      reader: r.reader,
-      count: r.count
-    };
-  });
-}
-
-function formatDate(date) {
-  var d = new Date(date),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [year, month, day].join("-");
-}
 module.exports = router;

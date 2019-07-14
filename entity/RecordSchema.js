@@ -26,9 +26,11 @@ module.exports = new EntitySchema({
     client: {
       type: "varchar"
     },
-    myyy: {
-      type: "varchar",
-      nullable: true
+    start: {
+      type: "timestamp"
+    },
+    end: {
+      type: "timestamp"
     }
   }
 });

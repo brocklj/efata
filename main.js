@@ -11,6 +11,7 @@ var usersRouter = require("./routes/users");
 var outputsRouter = require("./routes/output");
 var inputRouter = require("./routes/input");
 var napovedaRouter = require("./routes/napoveda");
+var detailRouter = require("./routes/detail");
 require("dotenv").config();
 var app = express();
 var multer = multer();
@@ -39,6 +40,7 @@ typeorm
     app.use("/output", outputsRouter);
     app.use("/input", inputRouter);
     app.use("/napoveda", napovedaRouter);
+    app.use("/detail", detailRouter);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {

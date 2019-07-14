@@ -21,8 +21,6 @@ router.post("/", upload.single("file"), async (req, res) => {
 
   const rg = new RecordGenerator();
   var records = rg.processData(output);
-  console.log(output);
-  console.log(records);
 
   const postRepository = getRepository(Record);
   await postRepository.save(records);

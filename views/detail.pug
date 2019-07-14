@@ -1,0 +1,19 @@
+table(class="table")
+    thead
+    tr
+        th(scope="col")= 'Název činnosti'                        
+        th= 'Start'
+        th= 'Konec'
+        th= 'Celkový čas (hh:mm:ss)'
+
+    tbody                
+    each r in out
+        tr
+
+        td= r.name
+        td= r.start
+        td= r.end                  
+        td= r.totalTime        
+if out.length == 0
+    center Nebyly nalezeny žádné záznamy!
+br

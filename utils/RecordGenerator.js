@@ -62,6 +62,8 @@ export default class RecordGenerator {
   processData(inputData) {
     this.input = this.assignClient(inputData);
 
+    this.sortInputByDate(this.input);
+
     for (var i = 0; this.input.length > i; i++) {
       var data = this.input[i];
 
@@ -113,6 +115,20 @@ export default class RecordGenerator {
     return input;
   }
 
+  sortInputByDate(input) {
+    this.input = input.sort((a, b) => {
+      var date1 = this.getDate(a.date, a.time);
+      var date2 = this.getDate(b.date, b.time);
+      if (date1 == date2) {
+        return 0;
+      } else if (date2 < date1) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  }
+
   isNewStarted(name) {
     return this.START.includes(name);
   }
@@ -138,8 +154,8 @@ export default class RecordGenerator {
     record.timeDiff = endItem.date - startItem.date;
     record.date = endItem.date;
     record.client = endItem.client;
-    record.start = startItem.rawDateTime;
-    record.end = endItem.rawDateTime;
+    record.start = startItem.date;
+    record.end = endItem.date;
     record.reader = endItem.reader;
 
     this.output.push(record);

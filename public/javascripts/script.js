@@ -29,3 +29,24 @@ function printDiv(divName) {
 
   return true;
 }
+
+$(function() {
+  $("#recodStatDetail").on("show.bs.modal", function(event) {
+    console.log(event);
+    var modalBody = $("#recodStatDetail").find(".modal-body");
+    var urlParams = new URLSearchParams(window.location.search);
+    fetch(
+      "./detail?" +
+        $.param({
+          client: urlParams.get("client"),
+          start_date: urlParams.get("start_date"),
+          end_date: urlParams.get("end_date"),
+          code: event.relatedTarget.innerText
+        })
+    )
+      .then(res => res.text())
+      .then(content => {
+        modalBody.html(content);
+      });
+  });
+});
