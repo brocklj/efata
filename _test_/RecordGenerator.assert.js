@@ -26,6 +26,30 @@ describe("Test RecordGenerator", () => {
         time: "13:50:00",
         date: "24/06/19",
         reader: "149439"
+      },
+      {
+        code: "uzivatel 1a",
+        time: "14:48:44",
+        date: "24/06/19",
+        reader: "149439"
+      },
+      {
+        code: "1A Ubytovani 1",
+        time: "14:49:00",
+        date: "24/06/19",
+        reader: "149439"
+      },
+      {
+        code: "uzivatel 1a",
+        time: "14:49:55",
+        date: "24/06/19",
+        reader: "149439"
+      },
+      {
+        code: "1A Ubyt kon 1",
+        time: "14:50:00",
+        date: "24/06/19",
+        reader: "149439"
       }
     ];
 
@@ -36,6 +60,15 @@ describe("Test RecordGenerator", () => {
         reader: "149439",
         start: "24/06/19 13:49:00",
         end: "24/06/19 13:50:00",
+        timeDiff: 60000,
+        client: "uzivatel 1a"
+      }),
+      new Record({
+        name: "1A Ubyt kon 1",
+        date: new Date("2019-06-24T12:50:00.000Z"),
+        reader: "149439",
+        start: "24/06/19 14:49:00",
+        end: "24/06/19 14:50:00",
         timeDiff: 60000,
         client: "uzivatel 1a"
       })
@@ -50,7 +83,7 @@ describe("Test RecordGenerator", () => {
     const multipleInputdata = [
       {
         code: "uzivatel 1a",
-        time: "13:48:44",
+        time: "13:48:00",
         date: "24/06/19",
         reader: "149439"
       },
@@ -61,8 +94,8 @@ describe("Test RecordGenerator", () => {
         reader: "149439"
       },
       {
-        code: "uzivatel 2",
-        time: "13:50:44",
+        code: "Uzivatel 2",
+        time: "13:50:00",
         date: "24/06/19",
         reader: "149439"
       },
@@ -74,26 +107,26 @@ describe("Test RecordGenerator", () => {
       },
       {
         code: "uzivatel 1a",
-        time: "13:49:55",
+        time: "13:52:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
         code: "1A Ubyt kon 1",
-        time: "13:50:00",
+        time: "13:53:00",
         date: "24/06/19",
         reader: "149439"
       },
 
       {
-        code: "uzivatel 2",
-        time: "13:55:00",
+        code: "Uzivatel 2",
+        time: "13:54:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
         code: "1A Ubyt kon 1",
-        time: "13:56:00",
+        time: "13:55:00",
         date: "24/06/19",
         reader: "149439"
       }
@@ -102,21 +135,21 @@ describe("Test RecordGenerator", () => {
     const example = [
       new Record({
         name: "1A Ubyt kon 1",
-        date: new Date("2019-06-24T11:50:00.000Z"),
+        date: new Date("2019-06-24T11:53:00.000Z"),
         reader: "149439",
         start: "24/06/19 13:49:00",
-        end: "24/06/19 13:50:00",
-        timeDiff: 60000,
+        end: "24/06/19 13:53:00",
+        timeDiff: 240000,
         client: "uzivatel 1a"
       }),
       new Record({
         name: "1A Ubyt kon 1",
-        date: new Date("2019-06-24T11:56:00.000Z"),
+        date: new Date("2019-06-24T11:55:00.000Z"),
         reader: "149439",
         start: "24/06/19 13:51:00",
-        end: "24/06/19 13:56:00",
-        timeDiff: 300000,
-        client: "uzivatel 2"
+        end: "24/06/19 13:55:00",
+        timeDiff: 240000,
+        client: "Uzivatel 2"
       })
     ];
 
@@ -129,7 +162,7 @@ describe("Test RecordGenerator", () => {
     const multipleInputdata = [
       {
         code: "uzivatel 1a",
-        time: "13:48:44",
+        time: "13:48:00",
         date: "24/06/19",
         reader: "149439"
       },
@@ -141,56 +174,56 @@ describe("Test RecordGenerator", () => {
       },
       {
         code: "uzivatel 3",
-        time: "13:49:44",
+        time: "13:50:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
         code: "1A Ubytovani 1",
-        time: "13:49:55",
+        time: "13:51:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
-        code: "uzivatel 2",
-        time: "13:51:44",
-        date: "24/06/19",
-        reader: "149439"
-      },
-      {
-        code: "1A Ubytovani 1",
+        code: "Uzivatel 2",
         time: "13:52:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
+        code: "1A Ubytovani 1",
+        time: "13:53:00",
+        date: "24/06/19",
+        reader: "149439"
+      },
+      {
         code: "uzivatel 1a",
-        time: "13:49:55",
+        time: "13:54:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
         code: "Jednani se zaj kon 0",
-        time: "13:50:00",
+        time: "13:55:00",
         date: "24/06/19",
         reader: "149439"
       },
 
       {
-        code: "uzivatel 2",
-        time: "13:55:00",
-        date: "24/06/19",
-        reader: "149439"
-      },
-      {
-        code: "1A Ubyt kon 1",
+        code: "Uzivatel 2",
         time: "13:56:00",
         date: "24/06/19",
         reader: "149439"
       },
       {
+        code: "1A Ubyt kon 1",
+        time: "13:57:00",
+        date: "24/06/19",
+        reader: "149439"
+      },
+      {
         code: "uzivatel 3",
-        time: "13:59:55",
+        time: "13:58:00",
         date: "24/06/19",
         reader: "149439"
       },
@@ -205,30 +238,30 @@ describe("Test RecordGenerator", () => {
     const example = [
       new Record({
         name: "Jednani se zaj kon 0",
-        date: new Date("2019-06-24T11:50:00.000Z"),
+        date: new Date("2019-06-24T11:55:00.000Z"),
         reader: "149439",
         start: "24/06/19 13:49:00",
-        end: "24/06/19 13:50:00",
-        timeDiff: 60000,
+        end: "24/06/19 13:55:00",
+        timeDiff: 360000,
         client: "uzivatel 1a"
       }),
       new Record({
         name: "1A Ubyt kon 1",
-        date: new Date("2019-06-24T11:56:00.000Z"),
+        date: new Date("2019-06-24T11:57:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:52:00",
-        end: "24/06/19 13:56:00",
+        start: "24/06/19 13:53:00",
+        end: "24/06/19 13:57:00",
         timeDiff: 240000,
-        client: "uzivatel 2"
+        client: "Uzivatel 2"
       }),
       new Record({
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:59:00.000Z"),
         reader: "149439",
-        start: "24/06/19 13:49:55",
+        start: "24/06/19 13:51:00",
         end: "24/06/19 13:59:00",
         client: "uzivatel 3",
-        timeDiff: 545000
+        timeDiff: 480000
       })
     ];
 

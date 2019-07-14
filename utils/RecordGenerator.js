@@ -86,7 +86,7 @@ export default class RecordGenerator {
 
       if (this.isNewStarted(name)) {
         this.waiting.push(inputObj);
-      } else {
+      } else if (this.isFinish(name)) {
         this.processFinished(inputObj);
       }
     }
@@ -117,6 +117,10 @@ export default class RecordGenerator {
     return this.START.includes(name);
   }
 
+  isFinish(name) {
+    return this.END.includes(name);
+  }
+
   processFinished(endItem) {
     var index = this.END.indexOf(endItem.name);
     var startKey = this.START[index];
@@ -124,41 +128,47 @@ export default class RecordGenerator {
   }
 
   finishWaiting(startKey, endItem) {
-    var toFinish;
-    var itemIndex = 0;
-    /* Get client to the endItem */
+    const startItem = this.findStartedForEndItem(startKey, endItem);
+    //console.log("startItem", startItem);
+    //console.log("endItem", endItem);
+    if (!startItem) return;
 
-    this.waiting.forEach((inputItem, i) => {
-      if (inputItem.name == startKey) {
-        if (!toFinish && inputItem.client == endItem.client) {
-          toFinish = inputItem;
-          itemIndex = i;
-        }
-        if (toFinish && toFinish.date >= inputItem.date) {
-          toFinish = inputItem;
-          itemIndex = i;
-        }
+    const record = new Record();
+    record.name = endItem.code;
+    record.timeDiff = endItem.date - startItem.date;
+    record.date = endItem.date;
+    record.client = endItem.client;
+    record.start = startItem.rawDateTime;
+    record.end = endItem.rawDateTime;
+    record.reader = endItem.reader;
+
+    this.output.push(record);
+  }
+
+  findStartedForEndItem(startKey, endItem) {
+    let candidate = null;
+    this.waiting = this.waiting.sort((a, b) => {
+      if (a.date > b.date) {
+        return 0;
+      } else if (a.date < b.date) {
+        return -1;
+      } else {
+        return 1;
       }
     });
-
-    if (toFinish) {
-      endItem.start = toFinish.rawDateTime;
-      endItem.end = endItem.rawDateTime;
-      var timeDiff = endItem.date - toFinish.date;
-      endItem.timeDiff = timeDiff;
-      endItem.totalTime = this.formatTimeDiff(timeDiff);
-      if (this.stat.hasOwnProperty(endItem.name)) {
-        this.stat[endItem.name] += timeDiff;
-      } else {
-        this.stat[endItem.name] = timeDiff;
-      }
-
-      this.output.push(new Record(endItem));
-
-      this.waiting = this.waiting.splice(itemIndex, 1);
+    let spliceIndex = 0;
+    for (let i = 0; this.waiting.length > i; ++i) {
+      const item = this.waiting[i];
+      if (item.code == startKey && endItem.client == item.client)
+        candidate = item;
+      spliceIndex = i;
     }
 
-    return toFinish;
+    if (candidate) {
+      this.waiting.splice(spliceIndex, 0);
+    }
+
+    return candidate;
   }
 
   formatTimeDiff(timeDiff) {
@@ -190,7 +200,8 @@ export default class RecordGenerator {
       date[0],
       time[0],
       time[1],
-      time[2]
+      time[2],
+      0
     );
   }
   getClient(inputItem) {
