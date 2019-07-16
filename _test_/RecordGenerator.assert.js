@@ -196,18 +196,6 @@ describe("Test RecordGenerator", () => {
         date: "24/06/19",
         reader: "149439"
       },
-      {
-        code: "uzivatel 1a",
-        time: "13:54:00",
-        date: "24/06/19",
-        reader: "149439"
-      },
-      {
-        code: "Jednani se zaj kon 0",
-        time: "13:55:00",
-        date: "24/06/19",
-        reader: "149439"
-      },
 
       {
         code: "Uzivatel 2",
@@ -232,19 +220,22 @@ describe("Test RecordGenerator", () => {
         time: "13:59:00",
         date: "24/06/19",
         reader: "149439"
+      },
+      {
+        code: "uzivatel 1a",
+        time: "14:00:00",
+        date: "24/06/19",
+        reader: "149439"
+      },
+      {
+        code: "Jednani se zaj kon 0",
+        time: "14:01:00",
+        date: "24/06/19",
+        reader: "149439"
       }
     ];
 
     const example = [
-      new Record({
-        name: "Jednani se zaj kon 0",
-        date: new Date("2019-06-24T11:55:00.000Z"),
-        reader: "149439",
-        start: new Date("2019-06-24T11:49:00.000Z"),
-        end: new Date("2019-06-24T11:55:00.000Z"),
-        timeDiff: 360000,
-        client: "uzivatel 1a"
-      }),
       new Record({
         name: "1A Ubyt kon 1",
         date: new Date("2019-06-24T11:57:00.000Z"),
@@ -262,6 +253,15 @@ describe("Test RecordGenerator", () => {
         end: new Date("2019-06-24T11:59:00.000Z"),
         client: "uzivatel 3",
         timeDiff: 480000
+      }),
+      new Record({
+        name: "Jednani se zaj kon 0",
+        date: new Date("2019-06-24T11:55:00.000Z"),
+        reader: "149439",
+        start: new Date("2019-06-24T11:49:00.000Z"),
+        end: new Date("2019-06-24T11:55:00.000Z"),
+        timeDiff: 360000,
+        client: "uzivatel 1a"
       })
     ];
 

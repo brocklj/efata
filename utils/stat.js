@@ -5,6 +5,7 @@ import { formatDatetime } from "../utils/timeFormat";
 export function processStat(records) {
   return records.map(r => {
     return {
+      id: r.id,
       name: r.name,
       totalTime: formatTimeDiff(r.timeDiff),
       reader: r.reader,

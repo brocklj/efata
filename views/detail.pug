@@ -5,7 +5,7 @@ table(class="table")
         th= 'Start'
         th= 'Konec'
         th= 'Celkový čas'
-        th= 'Čtečka'
+        th= 'Čtečka'        
 
     tbody                
     each r in out
@@ -15,7 +15,9 @@ table(class="table")
         td= r.start
         td= r.end                  
         td= r.totalTime
-        td= r.reader        
+        td= r.reader
+            <br/>
+            <a href="javascript:void(0)" class="record-detail edit" data-id="#{r.id}">edit</a>
+            <a href="javascript:void(0)" class="record-detail delete" data-id="#{r.id}">smaž</a>
 if out.length == 0
     center Nebyly nalezeny žádné záznamy!
-br
