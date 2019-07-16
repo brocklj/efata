@@ -5,6 +5,7 @@ table(class="table")
         th= 'Start'
         th= 'Konec'
         th= 'Celkový čas'
+        th= 'Klient'
         th= 'Čtečka'        
 
     tbody                
@@ -15,6 +16,7 @@ table(class="table")
         td= r.start
         td= r.end                  
         td= r.totalTime
+        td= r.client
         td= r.reader
             <br/>
             <a href="javascript:void(0)" class="record-detail edit" data-id="#{r.id}">edit</a>

@@ -6,6 +6,7 @@ export function processStat(records) {
   return records.map(r => {
     return {
       id: r.id,
+      client: r.client,
       name: r.name,
       totalTime: formatTimeDiff(r.timeDiff),
       reader: r.reader,

@@ -38,8 +38,9 @@ $(function() {
       "./detail?" +
         $.param({
           client: urlParams.get("client"),
-          start_date: urlParams.get("start_date"),
-          end_date: urlParams.get("end_date"),
+          start_date:
+            urlParams.get("start_date") || $('[name="start_date"]').val(),
+          end_date: urlParams.get("end_date") || $('[name="end_date"]').val(),
           code: event.relatedTarget.innerText
         })
     )

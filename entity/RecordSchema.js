@@ -4,6 +4,7 @@ const Record = require("../model/Record").Record;
 module.exports = new EntitySchema({
   name: "Record",
   target: Record,
+  uniques: [{ name: "Unique_Rec", columns: ["start", "end", "reader"] }],
   columns: {
     id: {
       primary: true,

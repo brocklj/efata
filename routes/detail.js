@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
   const manager = getManager();
   const records = await manager.query(
-    `SELECT id, name, reader, start, "end", "timeDiff" FROM public.record 
+    `SELECT id, name, client,reader, start, "end", "timeDiff" FROM public.record 
     ${start_date || end_date ? `WHERE` : ``} ${
       start_date
         ? `record."date" >= TO_TIMESTAMP('${start_date}', 'YYYY-MM-DD HH24:MI:SS')`
