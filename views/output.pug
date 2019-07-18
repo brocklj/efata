@@ -36,16 +36,18 @@ block content
       thead
         tr
           th(scope="col")= 'Název činnosti'                
-          th= 'Celkový čas (hh:mm:ss)'
+          th= 'Celkový čas (hh:mm:ss)'         
           th= 'Počet záznamů'
+          th= 'Čtečka'
 
       tbody                
         each r in out
           tr
             td
               a(href='#' data-toggle="modal", data-target="#recodStatDetail")= r.name          
-            td= r.totalTime
+            td= r.totalTime           
             td= r.count
+            td= r.reader
     if out.length == 0
       center Nebyly nalezeny žádné záznamy!
     br
