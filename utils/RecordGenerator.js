@@ -19,7 +19,8 @@ export const clientCodes = [
   "uzivatel 14a",
   "uzivatel 14b",
   "uzivatel 15a",
-  "uzivatel 15b"
+  "uzivatel 15b",
+  "uzivatel 20"
 ];
 
 export default class RecordGenerator {
