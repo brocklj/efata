@@ -9,7 +9,7 @@ table(class="table")
         th= 'Čtečka'        
 
     tbody                
-    each r in out
+    each r in out.records
         tr
 
         td= r.name
@@ -21,5 +21,14 @@ table(class="table")
             <br/>
             <a href="javascript:void(0)" class="record-detail edit" data-id="#{r.id}">edit</a>
             <a href="javascript:void(0)" class="record-detail delete" data-id="#{r.id}">smaž</a>
+    tfoot
+        tr
+          td= 'Celkem:'
+          td
+          td
+          td= out.timeSum
+          td
+          td
+          
 if out.length == 0
     center Nebyly nalezeny žádné záznamy!

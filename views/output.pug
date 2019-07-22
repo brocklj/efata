@@ -40,12 +40,17 @@ block content
           th= 'Počet záznamů'
 
       tbody                
-        each r in out
+        each r in out.records
           tr
             td
               a(href='#' data-toggle="modal", data-target="#recodStatDetail")= r.name          
             td= r.totalTime           
             td= r.count
+      tfoot
+        tr
+          td= 'Celkem:'
+          td= out.timeSum
+          td= out.countSum
     if out.length == 0
       center Nebyly nalezeny žádné záznamy!
     br
