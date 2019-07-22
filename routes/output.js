@@ -48,8 +48,8 @@ router.get("/", async function(req, res, next) {
         : ``
     } 
     ${client ? `AND record."client" = '${client}'` : ``}
-    GROUP BY  record.name,   
-    ORDER BY name;`
+    GROUP BY  record.name
+    ORDER BY record.name;`
   );
   const out = processStat(records);
 
