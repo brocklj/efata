@@ -36,7 +36,7 @@ router.get("/", async function(req, res, next) {
   }
   const manager = typeorm.getManager();
   const records = await manager.query(
-    `SELECT name, reader, SUM("timeDiff") as "timeDiff", COUNT(*) as "count"
+    `SELECT name, SUM("timeDiff") as "timeDiff", COUNT(*) as "count"
     FROM public.record 
     ${start_date || end_date ? `WHERE` : ``} ${
       start_date
@@ -48,8 +48,8 @@ router.get("/", async function(req, res, next) {
         : ``
     } 
     ${client ? `AND record."client" = '${client}'` : ``}
-    GROUP BY  record.name, record.reader   
-    ORDER BY reader ASC;`
+    GROUP BY  record.name,   
+    ORDER BY name;`
   );
   const out = processStat(records);
 

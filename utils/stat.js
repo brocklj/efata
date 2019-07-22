@@ -9,7 +9,6 @@ export function processStat(records) {
       client: r.client,
       name: r.name,
       totalTime: formatTimeDiff(r.timeDiff),
-      reader: r.reader,
       count: r.count,
       start: formatDatetime(r.start),
       end: formatDatetime(r.end)
