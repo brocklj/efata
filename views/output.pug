@@ -51,8 +51,8 @@ block content
           td= 'Suma:'
           td= out.timeSum
           td= out.countSum
-    if out.length == 0
-    center Nebyly nalezeny žádné záznamy!
+    if out.records.length == 0
+      center Nebyly nalezeny žádné záznamy!
     br
   <a href="#" onclick="printDiv('report-table')" class="btn btn-secondary">Tisk / export pdf</a>
 
