@@ -48,11 +48,11 @@ block content
             td= r.count
       tfoot
         tr
-          td= 'Celkem:'
+          td= 'Suma:'
           td= out.timeSum
           td= out.countSum
     if out.length == 0
-      center Nebyly nalezeny žádné záznamy!
+    center Nebyly nalezeny žádné záznamy!
     br
   <a href="#" onclick="printDiv('report-table')" class="btn btn-secondary">Tisk / export pdf</a>
 
