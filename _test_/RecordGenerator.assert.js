@@ -256,11 +256,11 @@ describe("Test RecordGenerator", () => {
       }),
       new Record({
         name: "Jednani se zaj kon 0",
-        date: new Date("2019-06-24T11:55:00.000Z"),
+        date: new Date("2019-06-24T12:01:00.000Z"),
         reader: "149439",
         start: new Date("2019-06-24T11:49:00.000Z"),
-        end: new Date("2019-06-24T11:55:00.000Z"),
-        timeDiff: 360000,
+        end: new Date("2019-06-24T12:01:00.000Z"),
+        timeDiff: 720000,
         client: "uzivatel 1a"
       })
     ];
