@@ -31,14 +31,12 @@ export function formatDate(date) {
 }
 
 export function formatDatetime(date) {
-  date = new Date(date);
-  return (
-    formatDate(date) +
-    " " +
-    date.getHours() +
-    ":" +
-    date.getMinutes() +
-    ":" +
-    date.getSeconds()
-  );
+  var d = new Date(date),
+    hours = "" + d.getHours(),
+    minutes = "" + d.getMinutes(),
+    seconds = d.getSeconds();
+  if (hours.length < 2) month = "0" + hours;
+  if (minutes.length < 2) minutes = "0" + minutes;
+  if (seconds.length < 2) seconds = "0" + seconds;
+  return formatDate(date) + " " + hours + ":" + minutes + ":" + seconds;
 }

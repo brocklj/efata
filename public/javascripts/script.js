@@ -32,22 +32,8 @@ function printDiv(divName) {
 
 $(function() {
   $("#recodStatDetail").on("show.bs.modal", function(event) {
-    var modalBody = $("#recodStatDetail").find(".modal-body");
-    var urlParams = new URLSearchParams(window.location.search);
-    fetch(
-      "./detail?" +
-        $.param({
-          client: urlParams.get("client"),
-          start_date:
-            urlParams.get("start_date") || $('[name="start_date"]').val(),
-          end_date: urlParams.get("end_date") || $('[name="end_date"]').val(),
-          code: event.relatedTarget.innerText
-        })
-    )
-      .then(res => res.text())
-      .then(content => {
-        modalBody.html(content);
-      });
+    const code = event.relatedTarget.innerText;
+    fillStatContent(code);
   });
 
   $("#recodStatDetail").on("click", ".edit", function(event) {
@@ -57,12 +43,16 @@ $(function() {
       type: "GET",
       url: "./detail/" + id,
       success: function(msg, value) {
-        console.log(msg);
         var a = $("<form action='#' method='put'></form>");
         var form = $("<div class='form-group'></div>");
         a.append(form);
-
-        form.append("<label for='start'>Zacatek</label>");
+        form.append(
+          "<input class='form-control' disabled name='record-detail-name' value='" +
+            msg.name +
+            "'>"
+        );
+        form.append("<input hidden id='modal-edit-id' value='" + id + "'>");
+        form.append("<label for='start'>Start</label>");
         form.append(
           "<input class='form-control' name='start' value='" + msg.start + "'>"
         );
@@ -70,9 +60,9 @@ $(function() {
         form.append(
           "<input class='form-control' name='end' value='" + msg.end + "'>"
         );
-        form.append("<label for='timeDiff'>Cas</label>");
+        form.append("<label for='timeDiff'>Celkovy Cas</label>");
         form.append(
-          "<input class='form-control' name='timeDiff' value='" +
+          "<input class='form-control' disabled name='timeDiff' value='" +
             msg.timeDiff +
             "'>"
         );
@@ -80,18 +70,6 @@ $(function() {
         form.append("");
 
         editModal.find(".modal-body").html(form);
-        $("#edit-modal").on("click", "#edit-submit", function() {
-          form.submit(e => {
-            e.preventDefault();
-            $.ajax({
-              url: "./detail/" + id,
-              type: "PUT",
-              success: function() {
-                console.log(11);
-              }
-            });
-          });
-        });
         editModal.modal("show");
       }
     });
@@ -124,13 +102,77 @@ $(function() {
         .removeClass("bg-danger text-white");
     }
   });
-  $("#edit-modal").on("change", "[name='end'], [name='start']", function() {
-    var startIntput = $("[name='start]");
-    var endtIntput = $("[name='end]");
-    var start = new Date(startIntput.value());
-    var end = new Date(endtIntput.value());
+
+  // Edit record
+  $("#edit-submit").on("click", function() {
+    $.ajax({
+      type: "PUT",
+      url: "./detail/" + $("#modal-edit-id").val(),
+      data: {
+        start: $('[name="start"]').val(),
+        end: $('[name="end"]').val(),
+        timeDiff: $('[name="timeDiff"]').attr("data-diff")
+      },
+      success: function() {
+        fillStatContent($('[name="record-detail-name"]').val());
+
+        $("#edit-modal").modal("hide");
+      }
+    });
+  });
+
+  $("#edit-modal").on("hidden.bs.modal", function() {
+    console.log(111);
+    $("body").addClass("modal-open");
+  });
+
+  $("#edit-modal").on("keyup", "[name='end'], [name='start']", function() {
+    var startIntput = $("[name='start']").first();
+    var endtIntput = $("[name='end']").first();
+    var start = new Date(startIntput.val());
+    var end = new Date(endtIntput.val());
     var diff = end - start;
 
-    $("[name='timeDiff']").value(diff);
+    $("[name='timeDiff']").val(formatTimeDiff(diff));
+    $("[name='timeDiff']").attr("data-diff", diff);
   });
 });
+
+function formatTimeDiff(timeDiff) {
+  var msec = timeDiff;
+  var hh = Math.floor(msec / 1000 / 60 / 60);
+  msec -= hh * 1000 * 60 * 60;
+  var mm = Math.floor(msec / 1000 / 60);
+  msec -= mm * 1000 * 60;
+  var ss = Math.floor(msec / 1000);
+  msec -= ss * 1000;
+  if (hh < 10) {
+    hh = "0" + hh;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  if (ss < 10) {
+    ss = "0" + ss;
+  }
+  return hh + ":" + mm + ":" + ss;
+}
+
+function fillStatContent(name) {
+  var urlParams = new URLSearchParams(window.location.search);
+  var modalBody = $("#recodStatDetail").find(".modal-body");
+  fetch(
+    "./detail?" +
+      $.param({
+        client: urlParams.get("client"),
+        start_date:
+          urlParams.get("start_date") || $('[name="start_date"]').val(),
+        end_date: urlParams.get("end_date") || $('[name="end_date"]').val(),
+        code: name
+      })
+  )
+    .then(res => res.text())
+    .then(content => {
+      modalBody.html(content);
+    });
+}

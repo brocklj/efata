@@ -57,10 +57,14 @@ router.put("/:id", async (req, res) => {
   const { start, end } = req.body;
 
   console.log(id, end);
+  const recordRepository = await getManager().getRepository("record");
 
-  const record = await getManager()
-    .getRepository("record")
-    .findOneOrFail(id);
+  const record = await recordRepository.findOneOrFail(id);
+  const changedRecord = {
+    ...record,
+    ...req.body
+  };
+  await recordRepository.save(changedRecord);
   return res.status(200).json(record);
 });
 

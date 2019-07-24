@@ -13,3 +13,7 @@ a {
   padding: 10px;
   border: 1px solid #aaaaaa;
 }
+
+.modal {
+  overflow: auto !important;
+}
