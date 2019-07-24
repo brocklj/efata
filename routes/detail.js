@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
     } 
     ${client ? `AND record."client" = '${client}'` : ``}
     ${code ? `AND record."name" = '${code}'` : ``}
-    ORDER BY "timeDiff" DESC;`
+    ORDER BY "date" ASC;`
   );
   const out = processStat(records);
 
