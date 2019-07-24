@@ -176,7 +176,11 @@ export default class RecordGenerator {
     let spliceIndex = 0;
     for (let i = 0; this.waiting.length > i; ++i) {
       const item = this.waiting[i];
-      if (item.code == startKey && endItem.client == item.client)
+      if (
+        item.code == startKey &&
+        endItem.client == item.client &&
+        endItem.reader == item.reader
+      )
         candidate = item;
       spliceIndex = i;
     }
