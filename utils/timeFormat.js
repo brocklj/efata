@@ -31,10 +31,10 @@ export function formatDate(date) {
 }
 
 export function formatDatetime(date) {
-  var d = new Date(date),
-    hours = "" + d.getHours(),
-    minutes = "" + d.getMinutes(),
-    seconds = d.getSeconds();
+  var d = new Date(date);
+  let hours = "" + d.getHours();
+  let minutes = "" + d.getMinutes();
+  let seconds = "" + d.getSeconds();
   if (hours.length < 2) hours = "0" + hours;
   if (minutes.length < 2) minutes = "0" + minutes;
   if (seconds.length < 2) seconds = "0" + seconds;
