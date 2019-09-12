@@ -76,7 +76,6 @@ describe("Test RecordGenerator", () => {
 
     const rg = new RecordGenerator();
     const output = rg.processData(sigleActionInputdata);
-    console.log(output);
     expect(output).toEqual(example);
   });
 

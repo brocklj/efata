@@ -85,21 +85,17 @@ export default class RecordGenerator {
         client: client
       };
 
-      const record = new Record();
-      record.name = name;
-      record.timeDiff = 1800000;
-      record.date = date;
-      record.client = client;
-      record.start = date;
-      record.end = date;
-      record.reader = reader;
-
       inputObj.inputIndex = i;
 
-      this.waiting.push(record);
+      if (this.isNewStarted(name)) {
+        this.waiting.push(inputObj);
+      } else if (this.isFinish(name)) {
+        this.processFinished(inputObj);
+      }
     }
+    console.log(this.waiting);
 
-    return this.waiting;
+    return this.output;
   }
 
   assignClient(input) {
