@@ -52,17 +52,9 @@ $(function() {
             "'>"
         );
         form.append("<input hidden id='modal-edit-id' value='" + id + "'>");
-        form.append("<label for='start'>Start</label>");
-        form.append(
-          "<input class='form-control' name='start' value='" + msg.start + "'>"
-        );
-        form.append("<label for='end'>Konec</label>");
-        form.append(
-          "<input class='form-control' name='end' value='" + msg.end + "'>"
-        );
         form.append("<label for='timeDiff'>Celkovy Cas</label>");
         form.append(
-          "<input class='form-control' disabled name='timeDiff' value='" +
+          "<input class='form-control' name='timeDiff' value='" +
             msg.timeDiff +
             "'>"
         );

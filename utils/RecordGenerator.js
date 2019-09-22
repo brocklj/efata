@@ -61,15 +61,20 @@ export default class RecordGenerator {
   }
 
   processData(inputData) {
-    this.input = this.assignClient(inputData);
-
+    this.input = inputData;
     this.sortInputByDate(this.input);
 
     for (var i = 0; this.input.length > i; i++) {
       var data = this.input[i];
 
       var name = data.code;
-      var client = data.client;
+      if(!this.START.includes(name)) {
+        continue;
+      }
+
+      var client = this.assignClient(inputData, i);
+
+      var time = this.getTime(inputData, i);
 
       var rawDateTime = data.date + " " + data.time;
       var reader = data.reader;
@@ -87,7 +92,7 @@ export default class RecordGenerator {
 
       const record = new Record();
       record.name = name;
-      record.timeDiff = 1800000;
+      record.timeDiff = time;
       record.date = date;
       record.client = client;
       record.start = date;
@@ -102,23 +107,34 @@ export default class RecordGenerator {
     return this.waiting;
   }
 
-  assignClient(input) {
-    input = input.map((item, i) => {
-      if (
-        !this.clientCodes.includes(item.code) &&
-        item.reader == input[i - 1].reader
-      ) {
-        let clientCode = input[i - 1].code || "Neznamy";
-        return {
-          ...item,
-          client: clientCode
-        };
+  assignClient(input, index) {
+    try{
+      var name = input[index - 1].code;
+      if(!this.clientCodes.includes(name)){
+        throw 'chyba, klient nenalezen'
       }
-    });
+      return name;
+    }catch(err){
+      return 'chybne zadany klient';
+    }
+  }
 
-    input = input.filter(item => item);
+  getTime(input, index) {
+    var timeSum = 0;
+      for (index; input.length > index + 1; index++){
+          var item = input[index + 1];
+          if(!item.code.startsWith('cas')) {
+              break;
+          }
 
-    return input;
+          var time = item.code.replace('cas:', '').replace('min', '');
+          time = parseInt(time);
+
+          timeSum += time;
+
+      }
+
+      return timeSum * 60000;
   }
 
   sortInputByDate(input) {

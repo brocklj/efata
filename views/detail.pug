@@ -1,9 +1,8 @@
 table(class="table")
     thead
     tr
-        th(scope="col")= 'Název činnosti'                        
-        th= 'Start'
-        th= 'Konec'
+        th(scope="col")= 'Název činnosti'                                
+        th= 'Datum'
         th= 'Celkový čas'
         th= 'Klient'
         th= 'Čtečka'        
@@ -13,8 +12,7 @@ table(class="table")
         tr
 
         td= r.name
-        td= r.start
-        td= r.end                  
+        td= r.date           
         td= r.totalTime
         td= r.client
         td= r.reader
@@ -25,8 +23,8 @@ table(class="table")
         tr
           td= 'Suma:'
           td
-          td
           td= out.timeSum
+          td
           td
           td
           

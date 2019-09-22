@@ -56,7 +56,6 @@ router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { start, end } = req.body;
 
-  console.log(id, end);
   const recordRepository = await getManager().getRepository("record");
 
   const record = await recordRepository.findOneOrFail(id);
