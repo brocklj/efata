@@ -15,6 +15,7 @@ export function processStat(records) {
       reader: r.reader,
       totalTime: formatTimeDiff(r.timeDiff),
       count: r.count,
+      date: formatDatetime(r.date),
       start: formatDatetime(r.start),
       end: formatDatetime(r.end)
     };
