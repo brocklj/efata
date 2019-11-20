@@ -2,7 +2,7 @@ import RecordGenerator from "../utils/RecordGenerator";
 import { Record } from "../model/Record";
 describe("Test RecordGenerator", () => {
   test("creates Record one object from single action", () => {
-    const sigleActionInputdata = [
+      const sigleActionInputdata = [
       {
         code: "uzivatel 1a",
         time: "13:48:44",
@@ -27,6 +27,18 @@ describe("Test RecordGenerator", () => {
         date: "24/06/19",
         reader: "149436"
       },      
+      {
+        code: "cas:5min",
+        time: "14:49:01",
+        date: "24/06/19",
+        reader: "149436"
+      }, 
+      {
+        code: "cas:5min",
+        time: "14:49:02",
+        date: "24/06/19",
+        reader: "149436"
+      },         
     ];
 
     const example = [
@@ -36,7 +48,7 @@ describe("Test RecordGenerator", () => {
         start:new Date("2019-06-24T11:49:00.000Z"),
         end: new Date("2019-06-24T11:49:00.000Z"),
         reader: "149436",
-        timeDiff: 126000,
+        timeDiff: 2700000,
         client: "uzivatel 1a"
       })
     ];
@@ -95,21 +107,21 @@ describe("Test RecordGenerator", () => {
 
     const example = [
       new Record({
-        name: "1A Ubyt kon 1",
-        date: new Date("2019-06-24T11:53:00.000Z"),
+        name: "1A Ubytovani 1",
+        date: new Date("2019-06-24T11:49:00.000Z"),
         reader: "149439",
         start: new Date("2019-06-24T11:49:00.000Z"),
-        end: new Date("2019-06-24T11:53:00.000Z"),
-        timeDiff: 240000,
+        end: new Date("2019-06-24T11:49:00.000Z"),
+        timeDiff: 5700000,
         client: "uzivatel 1a"
       }),
       new Record({
-        name: "1A Ubyt kon 1",
+        name: "1A Ubytovani 1",
         date: new Date("2019-06-24T11:55:00.000Z"),
         reader: "149439",
-        start: new Date("2019-06-24T11:51:00.000Z"),
+        start: new Date("2019-06-24T11:55:00.000Z"),
         end: new Date("2019-06-24T11:55:00.000Z"),
-        timeDiff: 240000,
+        timeDiff: 5400000,
         client: "Uzivatel 2"
       })
     ];
