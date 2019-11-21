@@ -61,6 +61,18 @@ describe("Test RecordGenerator", () => {
   test("Test RecordGenreatorOn two clients records", () => {
     const multipleInputdata = [
       {
+        code: "Uzivatel 2",
+        time: "12:54:00",
+        date: "23/06/19",
+        reader: "149439"
+      },
+      {
+        code: "Uzivatel 2",
+        time: "12:54:00",
+        date: "23/06/19",
+        reader: "149439"
+      },
+      {
         code: "uzivatel 1a",
         time: "13:48:00",
         date: "24/06/19",
@@ -101,6 +113,18 @@ describe("Test RecordGenerator", () => {
         code: "cas:90min",
         time: "13:56:00",
         date: "24/06/19",
+        reader: "149439"
+      },
+      {
+        code: "1A Ubytovani 1",
+        time: "13:55:00",
+        date: "25/06/19",
+        reader: "149439"
+      },
+      {
+        code: "cas:90min",
+        time: "13:56:00",
+        date: "25/06/19",
         reader: "149439"
       },
     ];

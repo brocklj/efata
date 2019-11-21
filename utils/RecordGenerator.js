@@ -76,6 +76,8 @@ export default class RecordGenerator {
 
       var time = this.getTime(inputData, i);
 
+    
+
       var rawDateTime = data.date + " " + data.time;
       var reader = data.reader;
 
@@ -101,7 +103,9 @@ export default class RecordGenerator {
 
       inputObj.inputIndex = i;
 
-      this.waiting.push(record);
+      if(client && time) {
+        this.waiting.push(record);
+      }      
     }
 
     return this.waiting;
@@ -115,7 +119,7 @@ export default class RecordGenerator {
       }
       return name;
     }catch(err){
-      return 'chybne zadany klient';
+      return null;
     }
   }
 
@@ -253,6 +257,6 @@ export default class RecordGenerator {
 
     return clientItem && this.clientCodes.includes(clientItem.code)
       ? clientItem.code
-      : "Klient nedefinovan";
+      : null;
   }
 }
